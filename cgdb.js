@@ -101,12 +101,11 @@
 	*	@param {Array} vals Array containing the values
 	*/
 	this.insertIntoTable = function(table, fields, vals) {
-		var time1 = new Date().getTime();
 		var me = this;
 		if(table && fields && vals) {
 			this.db.transaction(function(tx){
 				var placeholders = me.preparePlaceholders(vals);
-				tx.executeSql("INSERT INTO " + table + ' (' + fields.join(',') + ') VALUES ('+placeholders+')', vals, function(tx, result){ me.time += (new Date().getTime()-time1); }, function(tx, error){console.log(error.message);});
+				tx.executeSql("INSERT INTO " + table + ' (' + fields.join(',') + ') VALUES ('+placeholders+')', vals, function(tx, result){ }, function(tx, error){console.log(error.message);});
 			}); 
 		}
 	}
