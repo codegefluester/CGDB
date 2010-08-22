@@ -1,0 +1,18 @@
+﻿<html>
+	<head>
+		<title>CGDB examples :: Create a database</title>
+		<!-- Get the install.js file where our database structure is saved -->
+		<script type="text/javascript" src="install.js"></script>
+		<script type="text/javascript" src="../../cgdb.js"></script>
+		<script type="text/javascript">
+			// Open our database
+			window.cgdb.init("My first database", 1.0, "My database display name", 2*1024*1024);
+			// Install the tables
+			window.cgdb.install(setup);
+		</script>
+	</head>
+	<body>
+		<p>If everything went well, you can open the developer console, open the tab "Storage"<br>
+		and see your newly created database and table there.</p>
+	</body>
+</html>

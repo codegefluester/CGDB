@@ -1,0 +1,52 @@
+﻿<html>
+	<head>
+		<title>CGDB examples :: Insert and Select into/from a table</title>
+		<!-- Get the install.js file where our database structure is saved -->
+		<script type="text/javascript" src="../Create database/install.js"></script>
+		<script type="text/javascript" src="../../cgdb.js"></script>
+		<script type="text/javascript">
+			// Open our database
+			window.cgdb.init("My first database", 1.0, "My database display name", 2*1024*1024);
+			// Install the tables
+			window.cgdb.install(setup);
+			
+			// Insert data into our table
+			window.cgdb.insertIntoTable("mytable", ['username', 'email'], ['root', 'root@localhost.com']);
+			
+			// Select the inserted data
+			window.cgdb.query("SELECT * FROM mytable", function(tx, result) {
+				if(result.rows.length > 0) {
+					for(var i=0;i<result.rows.length;i++) {
+						var tr = document.createElement("tr");
+						var td1 = document.createElement("td");
+						var td2 = document.createElement("td");
+						var td3 = document.createElement("td");
+						
+						td1.innerHTML = result.rows.item(i).id;
+						td2.innerHTML = result.rows.item(i).username;
+						td3.innerHTML = result.rows.item(i).email;
+						
+						tr.appendChild(td1);
+						tr.appendChild(td2);
+						tr.appendChild(td3);
+						
+						document.getElementsByTagName("table")[0].appendChild(tr);
+					}
+				} else {
+					alert('No results');
+				}
+			}, function(tx, error) {
+				alert("An error occured: " + error.message);
+			});
+		</script>
+	</head>
+	<body>
+		<table>
+			<tr>
+				<td>ID</td>
+				<td>Username</td>
+				<td>E-Mail</td>
+			</tr>
+		</table>
+	</body>
+</html>
